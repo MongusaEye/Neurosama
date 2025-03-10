@@ -14,12 +14,14 @@ namespace Neurosama.Content.Items
 			Item.placeStyle = 0;
 		}
 
-		public override void AddRecipes() {
-			CreateRecipe()
-				.AddIngredient(ItemID.StoneBlock, 50)
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.StoneBlock, 50)
                 .AddIngredient<ErmFish>(5)
-				.AddTile(TileID.HeavyWorkBench)
-				.Register();
-		}
+                .AddTile(TileID.HeavyWorkBench)
+                .AddCondition(Condition.InGraveyard)
+                .Register();
+        }
 	}
 }

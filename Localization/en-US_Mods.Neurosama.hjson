@@ -265,7 +265,7 @@ Dialogue: {
 		LoveDialogue3: I love you {0} <3!
 		IgnoredDialogue1: Did you not hear me? I said I love you!
 		IgnoredDialogue2: SAY IT BACK DAMNIT!
-		IgnoredDialogue3: I wont force you into anything though, don't worry! I'll just keep saying this until you say it back.
+		IgnoredDialogue3: I'll just keep saying this until you say it back.
 		IgnoredDialogue4: I think you'll eventually cave in and say it. ;)
 	}
 }

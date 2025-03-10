@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Neurosama.Content.NPCs;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Enums;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -9,7 +11,7 @@ using Terraria.ObjectData;
 
 namespace Neurosama.Content.Tiles
 {
-	// See StatueWorldGen to see how ExampleStatue is added as an option for naturally spawning statues during worldgen.
+	// TODO: See StatueWorldGen to see how ExampleStatue is added as an option for naturally spawning statues during worldgen.
 	public class ErmFishStatue : ModTile
 	{
 		public override void SetStaticDefaults() {
@@ -19,21 +21,30 @@ namespace Neurosama.Content.Tiles
 			TileID.Sets.IsAMechanism[Type] = true; // Ensures that this tile and connected pressure plate won't be removed during the "Remove Broken Traps" worldgen step
 
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
-			TileObjectData.addTile(Type);
+            TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft;
+
+            TileObjectData.newTile.StyleWrapLimit = 2;
+            TileObjectData.newTile.StyleMultiplier = 2;
+            TileObjectData.newTile.StyleHorizontal = true;
+
+            // Examplemod forgot to add an offset for the statue
+            TileObjectData.newTile.DrawYOffset = 2;
+
+            // Examplemod also forgot to add a flipped version
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+            TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
+
+            // Add tiles
+            TileObjectData.addAlternate(1);
+            TileObjectData.addTile(Type);
 
 			DustType = DustID.Stone;
 
 			AddMapEntry(new Color(144, 148, 144), Language.GetText("MapObject.Statue"));
 		}
 
-		// Example mod forgot to do this lol
-		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+        public override void HitWire(int i, int j)
 		{
-			offsetY = 2;
-			// TODO: offset in preview as well
-		}
-
-        public override void HitWire(int i, int j) {
             Tile tile = Main.tile[i, j];
 
             // Find the coordinates of top left tile square through math
