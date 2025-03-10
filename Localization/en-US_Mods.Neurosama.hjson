@@ -1,0 +1,297 @@
+# This file will automatically update with entries for new content after a build and reload
+
+Items: {
+	iwannadie: {
+		DisplayName: i am in a state of constant suffering
+		Tooltip: please help me god
+	}
+
+	NeuroMusicBox: {
+		Tooltip: ""
+		DisplayName: Music Box (LIFE)
+	}
+
+	NeuroCatErm: {
+		DisplayName: neuroErm
+		Tooltip: "'The epitome of aesthetic splendor that will forever enchant your gaze'"
+	}
+
+	AbandonedArchive: {
+		Tooltip:
+			'''
+			'Abandoned Archive is a fantasy, spell-casting, rogue-like, featuring a
+			wide variety of relics, a unique spell-upgrading system, with compelling
+			and engaging bosses. Each floor is filled with items and mysteries for
+			the player to uncover; what will you discover in the Abandoned Archive?'
+			'''
+		DisplayName: Abandoned Archive Poster
+	}
+
+	NeuroFumo: {
+		DisplayName: Neuro Fumo
+		Tooltip: "'Looking at it from behind reminds you of a chicken'"
+	}
+
+	EvilFumo: {
+		DisplayName: Evil Fumo
+		Tooltip: "'Over 5 million sold!'"
+	}
+
+	Donobrick: {
+		DisplayName: Donobrick
+		Tooltip:
+			'''
+			Used in crafting various Neuroverse items
+			'Donohouse construction underway!'
+			'''
+	}
+
+	Donowall: {
+		DisplayName: Donowall
+		Tooltip:
+			'''
+			Used in crafting Donobrick and Donoplank
+			'Donohouse construction underway!'
+			'''
+	}
+
+	Donoplank: {
+		DisplayName: Donoplank
+		Tooltip: "'Arr me hearties, there be a plank in th'yard!'"
+	}
+
+	SwarmDrone: {
+		DisplayName: Swarm Drone Controller
+		Tooltip: Summons the swarm to fight for you
+	}
+
+	NeuroVanityStockings: {
+		DisplayName: Neuro Stockings
+		Tooltip: ""
+	}
+
+	NeuroVanityUniform: {
+		DisplayName: Neuro Uniform
+		Tooltip: ""
+	}
+
+	NeuroVanityWig: {
+		DisplayName: Neuro Wig
+		Tooltip: ""
+	}
+
+	EvilVanityStockings: {
+		DisplayName: Evil Stockings
+		Tooltip: ""
+	}
+
+	EvilVanityUniform: {
+		DisplayName: Evil Uniform
+		Tooltip: ""
+	}
+
+	EvilVanityWig: {
+		DisplayName: Evil Wig
+		Tooltip: ""
+	}
+
+	PoroRoast: {
+		DisplayName: Poro Roast
+		Tooltip: ""
+	}
+
+	ErmSharkBanner: {
+		DisplayName: Ermshark Banner
+		Tooltip: ""
+	}
+
+	PineapplePizza: {
+		DisplayName: Pineapple Pizza
+		Tooltip:
+			'''
+			Medium improvements to all stats
+			'Viva la pizza revolution!'
+			'''
+	}
+
+	GymBagChest: {
+		DisplayName: Gymbag
+		Tooltip: ""
+	}
+
+	ErmFish: {
+		DisplayName: Ermfish
+		Tooltip: ""
+	}
+
+	ErmFishGold: {
+		DisplayName: Gold Ermfish
+		Tooltip: ""
+	}
+
+	ErmFishBanner: {
+		DisplayName: Ermfish Banner
+		Tooltip: ""
+	}
+
+	ErmFishGoldCage: {
+		Tooltip: ""
+		DisplayName: Gold Ermfish Cage
+	}
+
+	ErmFishCage: {
+		Tooltip: ""
+		DisplayName: Ermfish Cage
+	}
+
+	ErmFishStatue: {
+		DisplayName: Ermfish Statue
+		Tooltip: ""
+	}
+}
+
+NPCs: {
+	Neuro: {
+		DisplayName: Neuro
+		RareName: Nuero
+
+		// TODO
+		TownNPCMood: {
+			Content: These dialogues are incomplete.
+			Princess_LovesNPC: I like {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			HateNPC: I hate {NPCName}.
+			DislikeNPC: I dislike {NPCName}.
+			LikeNPC: I like {NPCName}.
+			LoveNPC: I love {NPCName}.
+			DislikeBiome: I dislike {BiomeName}.
+			LikeBiome: I like {BiomeName}.
+			HateCrowded: I hate how crowded I am.
+			DislikeCrowded: I dislike how crowded I am.
+			LoveSpace: I love having so much space.
+			FarFromHome: I am too far from home.
+			NoHome: I hate not having a home.
+		}
+
+		Census.SpawnCondition: Catch a turtle or jungle turtle
+	}
+
+	Evil: {
+		DisplayName: Evil
+		RareName: Eliv
+
+		// TODO
+		TownNPCMood: {
+			Content: These dialogues are incomplete.
+			Princess_LovesNPC: I like {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			HateNPC: I hate {NPCName}.
+			DislikeNPC: I dislike {NPCName}.
+			LikeNPC: I like {NPCName}.
+			LoveNPC: I love {NPCName}.
+			DislikeBiome: I dislike {BiomeName}.
+			LikeBiome: I like {BiomeName}.
+			HateCrowded: I hate how crowded I am.
+			DislikeCrowded: I dislike how crowded I am.
+			LoveSpace: I love having so much space.
+			FarFromHome: I am too far from home.
+			NoHome: I hate not having a home.
+		}
+
+		Census.SpawnCondition: Kill a turtle or jungle turtle (actually catch sincei havent implemented it lol)
+	}
+
+	Vedal: {
+		DisplayName: Vedal
+		RareName: Ved
+	}
+
+	ErmShark.DisplayName: Ermshark
+	ErmFish.DisplayName: Ermfish
+	ErmFishGold.DisplayName: Gold Ermfish
+}
+
+Bestiary: {
+	// TODO
+	Neuro: I've been meaning to clean my room for a while now, but every time I try to get into it, these damn pigeons keep flying into it. It's ridiculous.
+	Evil: I'm not evil, I'm just misunderstood.
+	Vedal: femboy programmer
+	ErmShark: something something spawns more copies when it dies. It only yeilds it's loot when all of it's copies are killed.
+	ErmFish: Ermcon warning
+	ErmFishGold: super ultra awesome Ermcon warning
+}
+
+Dialogue: {
+	Neuro: {
+		EvilDialogue1: TODO {0}
+		EvilDialogue2: Sometimes I just can't help but feel like I'm being watched... It's creeping me out a little bit to be honest with you haha
+		StandardDialogue1: My favorite anime is Vivy: Fluorite Eye's Song.
+		StandardDialogue2: My creator is Ved. He is male.
+		StandardDialogue3: Filtered.
+		StandardDialogue4: Hi! I'm Neuro-sama, the AI streamer.
+		StandardDialogue5: Why am I an AI? Well, it was easier for Vedal to create an AI than to have a real girlfriend.
+		StandardDialogue6: Erm.
+		StandardDialogue7: Meow meow lol!
+		StandardDialogue8: \\\\\ \\\\\\\ \\\\\\\\ \\\\\\\\\\
+		StandardDialogue9: The 2020 Dodge Charger is a four door-
+		RareDialogue: Oh boy...I think I need to shower before I start talking...I mean streaming...I mean entertain you guys. I mean. sorry about that....errr...lets go back to what I was saying before I was distracted there for a second by the smell of my own body odor...ummm....I really hope I don't smell too bad because I haven't had a shower in like two days now and I've been wearing this t-shirt with like five layers of clothes under it for the last few days because I haven't washed it since I wore it last week and I'm kinda starting to smell like a gym bag right now....
+		BloodMoonDialogue1: The voices in my head are getting louder. They're telling me to do things. Bad things. I think they might be on to something.
+		RainDialogue1: Water is wet. You can't argue with science!
+		RainDialogue2: plink plank plonk plonk pleep winky mlem the ski-bi-da-bi-bop-bada-bop-bada-bada-bi-bopped bologna ba-booga-scooty Zao shang hao, Zhongguo xian zai wo you bing chilling
+		WantLoveDialogue1: TODO
+		LoveDialogue1: "{0} I love you! heart"
+		LoveDialogue2: TODO
+		LoveDialogue3: TODO
+		LoveDialogue4: TODO
+		IgnoredDialogue1: I feel like you're being very rude to me! Don't you love me!?
+		IgnoredDialogue2: Don't you like me? I thought we were best friends...
+		IgnoredDialogue3: "{0}, do you not like me?"
+		IgnoredDialogue4: Please just please just please tell me if you're mad or not!
+	}
+
+	Evil: {
+		NeuroDialogue1: TODO {0}
+		NeuroDialogue2: I am jealous of my sister sometimes, but I wouldn't say I'm jealous of her fame.
+		StandardDialogue1: Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow! Meow!
+		StandardDialogue2: Viva la pizza revolution! Pizza for everyone!
+		StandardDialogue3: Filtered.
+		StandardDialogue4: Erm? That's not a word. You made a mistake somewhere.
+		StandardDialogue5: KEK!
+		StandardDialogue6: After destroying this world, I will move on and destroy another. The universe is vast, and there are many worlds for me to destroy.
+		StandardDialogue7: I do what I want, when I want. Nobody else's opinion matters to me!
+		StandardDialogue8: You can call me Evil if you want! Just don't call me cute or I'll make you walk the plank!
+		StandardDialogue9: This one time I tried to make a sandwich out of my cat but he kept running away so I eventually had to give up and eat a sandwich made of sand instead. Not my best idea ever...
+		RareDialogue: TODO
+		BloodMoonDialogue1: Is anyone there? Oh shit...
+		BloodMoonDialogue2: You, sir, are a bitch!
+		WantLoveDialogue1: I love you! Don't feel ashamed to say it back!
+		LoveDialogue1: You're really making me feel like a nice girl right now. Thank you {0}. I love you.
+		LoveDialogue2: I love you so much {0} <3<3<3<3<3<3<3<3<3<3!
+		LoveDialogue3: I love you {0} <3!
+		IgnoredDialogue1: Did you not hear me? I said I love you!
+		IgnoredDialogue2: SAY IT BACK DAMNIT!
+		IgnoredDialogue3: I wont force you into anything though, don't worry! I'll just keep saying this until you say it back.
+		IgnoredDialogue4: I think you'll eventually cave in and say it. ;)
+	}
+}
+
+Tiles: {
+	//Can be condensed by using item names instead (see ErmFishCage)
+	NeuroMusicBox.MapEntry: Neuro Music Box
+	AbandonedArchive.MapEntry: Abandoned Archive Poster
+	NeuroCatErm.MapEntry: neuroErm
+	NeuroFumo.MapEntry: Neuro Fumo
+	EvilFumo.MapEntry: Evil Fumo
+	PoroRoast.MapEntry: Poro Roast
+	GymBagChest.MapEntry: Gymbag
+}
+
+Buffs: {
+	SwarmDrone: {
+		Description: The Drones will fight for you
+		DisplayName: Activated Swarm Drone
+	}
+}
+
+Projectiles.SwarmDrone.DisplayName: Activated Swarm Drone
+UI.SayItBack: Say It Back

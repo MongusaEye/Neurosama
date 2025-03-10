@@ -1,0 +1,3 @@
+displayName = Neuro-sama mod
+author = Konomi
+version = 0.1
