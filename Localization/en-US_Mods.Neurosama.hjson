@@ -277,12 +277,11 @@ Dialogue: {
 
 Tiles: {
 	//Can be condensed by using item names instead (see ErmFishCage)
-	NeuroMusicBox.MapEntry: Neuro Music Box
+	NeuroMusicBox.MapEntry: Music Box (LIFE)
 	AbandonedArchive.MapEntry: Abandoned Archive Poster
 	NeuroCatErm.MapEntry: neuroErm
 	NeuroFumo.MapEntry: Neuro Fumo
 	EvilFumo.MapEntry: Evil Fumo
-	PoroRoast.MapEntry: Poro Roast
 	GymBagChest.MapEntry: Gymbag
 }
 
