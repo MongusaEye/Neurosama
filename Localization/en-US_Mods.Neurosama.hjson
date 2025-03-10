@@ -95,11 +95,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	PoroRoast: {
-		DisplayName: Poro Roast
-		Tooltip: ""
-	}
-
 	ErmSharkBanner: {
 		DisplayName: Ermshark Banner
 		Tooltip: ""
@@ -277,7 +272,7 @@ Dialogue: {
 
 Tiles: {
 	//Can be condensed by using item names instead (see ErmFishCage)
-	NeuroMusicBox.MapEntry: Music Box (LIFE)
+	NeuroMusicBox.MapEntry: Music Box
 	AbandonedArchive.MapEntry: Abandoned Archive Poster
 	NeuroCatErm.MapEntry: neuroErm
 	NeuroFumo.MapEntry: Neuro Fumo
