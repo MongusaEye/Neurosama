@@ -246,6 +246,7 @@ namespace Neurosama.Content.NPCs.Town
                 .Add<Items.Furniture.NeuroFumo>()
                 .Add<Items.Furniture.AbandonedArchive>()
                 .Add<Items.Donowall>()
+                .Add<Items.NeuroMusicBox>()
                 //.Add<Items.SwarmPet>()
                 .Add<Items.iwannadie>(Condition.IsNpcShimmered) // shimmer test
             ;
