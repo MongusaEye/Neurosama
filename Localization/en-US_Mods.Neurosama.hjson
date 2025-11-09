@@ -58,10 +58,7 @@ Items: {
 
 	Donowall: {
 		DisplayName: Donowall
-		Tooltip:
-			'''
-			'Donohouse construction underway!'
-			'''
+		Tooltip: "'Donohouse construction underway!'"
 	}
 
 	Donoplank: {
