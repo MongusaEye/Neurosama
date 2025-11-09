@@ -305,8 +305,6 @@ Projectiles: {
 	EvilHarpoon.DisplayName: Evil's Harpoon
 }
 
-UI.SayItBack: Say It Back
-
 Emotes: {
 	NeuroEmote.Command: neuro
 	EvilEmote.Command: evil
