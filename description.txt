@@ -1,8 +1,29 @@
-Neuro-sama mod for Terraria
+<3 ~ [c/947edc:Neuro-sama mod!] ~ <3
 
-CREDITS
-Konomi - Code, Sprites
-MongusaEye - Sprites
-Pachekin - Code, Sprites
-owobred - Code (Drone AI)
-Kaseio - Code
+This is a fan made mod for the Twitch streamer Neuro-sama and her sister Evil Neuro. It aims to be mainly a cosmetic mod, adding a bunch of references to the Neuro twins and their community.
+
+== Current Features ==
+- Neuro, Evil and Vedal NPCs
+- All 3 official plushes
+- Ermfish critter and Ermshark enemy
+- Vanity for Neuro and Evil’s outfits
+- Abandoned Archive (Corpa)
+- Music boxes for all the Neuro & Evil originals
+- neuroErm
+- Donowall building material & Gymbag chest
+- Swarm drone minion
+- Assorted emotes
+- Some more Neuro/Evil references
+
+== Credits ==
+- Konomi (Programming)
+- Mongusaeye (Art)
+- Pachekin (Art, Programming)
+
+== Additional Credits ==
+- Kaseio (Fixed some bugs)
+- owobred (Drone AI Code)
+- W1n7ner (Original creator of neuroErm)
+- Vedal (Creator of Neuro-sama and Abandoned Archive)
+
+Check the mod's homepage for links and the source code!
