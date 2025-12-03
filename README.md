@@ -38,13 +38,13 @@ Anyone is welcome to contribute to the mod! If you would like to participate in 
 - Vedal (Creator of Neuro-sama and Abandoned Archive)
 
 ##
-### [Mod on the Steam Workshop]() (TBD)
+### [Mod on the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3617293068)
 
 ### [Neuro-sama on Twitch](https://twitch.tv/vedal987)
 
 ### [Neuro-sama Discord](https://discord.gg/neurosama)
 
-### [Discord Thread for Mod Discussion]() (TBD)
+### [Discord Thread for Mod Discussion](https://discord.com/channels/574720535888396288/1445858406090018836)
 
 ## License
 All original content created for this mod is licensed under the [MIT license](https://github.com/k0nomi/Neurosama/blob/main/LICENSE).
