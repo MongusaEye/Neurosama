@@ -1,4 +1,4 @@
-=~= [c/947edc:Neuro-sama mod!] =~= =~=
+=~= [c/947edc:Neuro-sama mod!] =~=
 
 This is a fan made mod for the Twitch streamer Neuro-sama and her sister Evil Neuro. It aims to be mainly a cosmetic mod, adding a bunch of references to the Neuro twins and their community.
 
