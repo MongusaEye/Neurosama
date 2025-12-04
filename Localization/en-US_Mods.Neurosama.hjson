@@ -323,3 +323,5 @@ Emotes: {
 	TutelEmote.Command: tutel
 	FrickEmote.Command: frick
 }
+
+UI.ToggleOutfit: Toggle Outfit
