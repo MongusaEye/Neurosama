@@ -1,4 +1,4 @@
-[h1]Neuro-sama Mod[/h1]
+[h1]Neuro-sama Mod![/h1]
 This is a fan made mod for the Twitch streamer Neuro-sama and her sister Evil Neuro. It aims to be mainly a cosmetic mod, adding a bunch of references to the Neuro twins and their community.
 
 The mod is still in beta-like state, so there are a few unfinished features and unsquashed bugs. If you find any, you can report them in the Discord thread or by creating an issue on Github.
