@@ -17,6 +17,7 @@ using Terraria.Utilities;
 
 namespace Neurosama.Content.NPCs.Town
 {
+    [AutoloadHead]
     public class Evil : ModNPC
     {
         public const string ShopName = "Shop";
@@ -47,7 +48,10 @@ namespace Neurosama.Content.NPCs.Town
 
             // Adds the Variant Heads to the NPCHeadLoader  
             HeadIndexes = new int[Textures.Length];
-            for (int i = 0; i < Textures.Length; i++)
+
+            HeadIndexes[0] = NPCHeadLoader.GetHeadSlot(Textures[0] + "_Head");
+
+            for (int i = 1; i < Textures.Length; i++)
             {
                 HeadIndexes[i] = Mod.AddNPCHeadTexture(Type, Textures[i] + "_Head");
             }
