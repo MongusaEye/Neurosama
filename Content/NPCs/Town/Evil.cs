@@ -46,17 +46,14 @@ namespace Neurosama.Content.NPCs.Town
                 throw new System.Exception($"{GetType().Name} Textures array length is not even! Each variant must have a respective shimmer variant.");
             }
 
-            // Adds the Variant Heads to the NPCHeadLoader  
+            // Adds the Variant Heads to the NPCHeadLoader
+            // The default head texture is added to the array later in SetStaticDefaults
             HeadIndexes = new int[Textures.Length];
-
-            HeadIndexes[0] = NPCHeadLoader.GetHeadSlot(Textures[0] + "_Head");
 
             for (int i = 1; i < Textures.Length; i++)
             {
                 HeadIndexes[i] = Mod.AddNPCHeadTexture(Type, Textures[i] + "_Head");
             }
-
-            ModContent.GetInstance<Neurosama>().Logger.Info(HeadIndexes[0]);
         }
 
         public override void SetStaticDefaults()
@@ -92,6 +89,7 @@ namespace Neurosama.Content.NPCs.Town
                 .SetNPCAffection<Neuro>(AffectionLevel.Love) // cute sisters
             ;
 
+            HeadIndexes[0] = NPCHeadLoader.GetHeadSlot(HeadTexture); // Head texture is now loaded, add index to array
             NPCProfile = new TwinTownNPCProfile(Textures, HeadIndexes);
         }
 
