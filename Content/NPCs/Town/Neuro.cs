@@ -37,8 +37,8 @@ namespace Neurosama.Content.NPCs.Town
             Textures = [
                Texture,
                Texture + "_Shimmer",
-               //Texture + "_Toggle",
-               //Texture + "_Toggle_Shimmer",
+               Texture + "_Neko",
+               Texture + "_Neko_Shimmer",
             ];
 
             // Assert that textures array is of even length, so x % Textures.Length doesn't mess with shimmer state
@@ -231,7 +231,7 @@ namespace Neurosama.Content.NPCs.Town
         public override void SetChatButtons(ref string button, ref string button2)
         {
             button = Language.GetTextValue("LegacyInterface.28");
-            //button2 = "Toggle";
+            button2 = "Toggle";
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref string shop)
