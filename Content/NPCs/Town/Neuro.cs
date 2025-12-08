@@ -15,6 +15,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.GameContent.UI;
 
 namespace Neurosama.Content.NPCs.Town
 {
@@ -39,6 +40,10 @@ namespace Neurosama.Content.NPCs.Town
                Texture + "_Shimmer",
                Texture + "_Neko",
                Texture + "_Neko_Shimmer",
+               Texture + "_Frog",
+               Texture + "_Frog_Shimmer",
+               Texture + "_Duck",
+               Texture + "_Duck_Shimmer",
             ];
 
             // Assert that textures array is of even length, so x % Textures.Length doesn't mess with shimmer state
@@ -323,5 +328,28 @@ namespace Neurosama.Content.NPCs.Town
         {
             CombatText.NewText(new Rectangle((int)NPC.Center.X, (int)NPC.Center.Y, 0, 0), new Color(255, 191, 191), NPC.IsShimmerVariant.ToString());
         }*/
+
+        public override int? PickEmote(Player closestPlayer, List<int> emoteList, WorldUIAnchor otherAnchor) {
+            emoteList.Add(ModContent.EmoteBubbleType<ErmEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<ErmEmote>());
+
+            emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
+
+            emoteList.Add(ModContent.EmoteBubbleType<NeweroEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<NeweroEmote>());
+
+            emoteList.Add(ModContent.EmoteBubbleType<SmileEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<SmileEmote>());
+
+            emoteList.Add(ModContent.EmoteBubbleType<TutelEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<TutelEmote>());
+
+            emoteList.Add(ModContent.EmoteBubbleType<FrickEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<FocusEmote>());
+            emoteList.Add(ModContent.EmoteBubbleType<NewlivEmote>());
+            return null;
+		}
         }
 }
