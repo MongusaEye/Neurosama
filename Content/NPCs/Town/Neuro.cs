@@ -331,24 +331,19 @@ namespace Neurosama.Content.NPCs.Town
 
         public override int? PickEmote(Player closestPlayer, List<int> emoteList, WorldUIAnchor otherAnchor) {
             emoteList.Add(ModContent.EmoteBubbleType<ErmEmote>());
-            emoteList.Add(ModContent.EmoteBubbleType<ErmEmote>());
 
-            emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
-            emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
             emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
 
             emoteList.Add(ModContent.EmoteBubbleType<NeweroEmote>());
-            emoteList.Add(ModContent.EmoteBubbleType<NeweroEmote>());
 
             emoteList.Add(ModContent.EmoteBubbleType<SmileEmote>());
-            emoteList.Add(ModContent.EmoteBubbleType<SmileEmote>());
 
-            emoteList.Add(ModContent.EmoteBubbleType<TutelEmote>());
             emoteList.Add(ModContent.EmoteBubbleType<TutelEmote>());
 
             emoteList.Add(ModContent.EmoteBubbleType<FrickEmote>());
             emoteList.Add(ModContent.EmoteBubbleType<FocusEmote>());
             emoteList.Add(ModContent.EmoteBubbleType<NewlivEmote>());
+            emoteList.Add(11); //curse
             return null;
 		}
         }
