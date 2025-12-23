@@ -14,11 +14,23 @@ public class EmoteSounds : GlobalEmoteBubble
             return;
 
         // add modded emote sounds here
+        // Options: "Neuro", "Evil", "Twins", "TwinsAndPlayer"
         PlayModEmoteSound<NeweroEmote>(bubble, "fx_groantube", "Twins");
         PlayModEmoteSound<NewlivEmote>(bubble, "fx_metalpipe", "Evil"); //temporary until pipes emote is drawn
             // voicelines
+        PlayModEmoteSound<ErmEmote>(bubble, "evil_erm", "Evil");
         PlayModEmoteSound<ErmEmote>(bubble, "neuro_erm", "Neuro");
+        
         PlayModEmoteSound<HeartEmote>(bubble, "evil_heart", "Evil");
+        PlayModEmoteSound<HeartEmote>(bubble, "neuro_heart!!", "Neuro");
+
+        PlayModEmoteSound<FrickEmote>(bubble, "evil_frick", "Evil");
+        PlayModEmoteSound<FrickEmote>(bubble, "neuro_frick", "Neuro");
+
+        PlayModEmoteSound<SmileEmote>(bubble, "evil_smile", "Evil");
+        PlayModEmoteSound<SmileEmote>(bubble, "neuro_smile", "Neuro");
+
+        //focus placeholder
 
         // add vanilla emote sounds here
         PlayVanillaEmoteSound(134, bubble, "fx_wompwompwomp", "Twins"); //sad
@@ -32,6 +44,7 @@ public class EmoteSounds : GlobalEmoteBubble
         PlayVanillaEmoteSound(78, bubble, "fx_poke", "Twins"); //sword
         PlayVanillaEmoteSound(13, bubble, "fx_sus", "Twins"); //slime (it looks like the visor of the crewmate trust)
         PlayVanillaEmoteSound(84, bubble, "fx_deathbell", "Twins"); //tombstone
+        PlayVanillaEmoteSound(15, bubble, "fx_badumtss", "Twins"); //laugh
     }
 
     private void PlayModEmoteSound<T>(
