@@ -25,12 +25,12 @@ public class EmoteSounds : GlobalEmoteBubble
         PlayEmoteSound(EmoteID.DebuffCurse, bubble, "fx_incorrectbuzzer", "Twins");
         PlayEmoteSound(EmoteID.EmoteNote, bubble, "fx_correctbuzzer", "Twins");
         PlayEmoteSound(EmoteID.ItemDynamite, bubble, "fx_vineboom", "Twins");
-        PlayEmoteSound(EmoteID.DebuffSilence, bubble, "fx_awkwardcrickets", "Twins"); //silent (the emote is called silent but the sound is not)
-        PlayEmoteSound(EmoteID.EmotionLove, bubble, "fx_rizz", "Twins");
-        PlayEmoteSound(EmoteID.EmoteScowl, bubble, "fx_scaryviolin", "Twins");
-        PlayEmoteSound(EmoteID.ItemSword, bubble, "fx_poke", "Twins");
+        PlayEmoteSound(EmoteID.DebuffSilence, bubble, "fx_awkwardcrickets", "Twins");
+        PlayEmoteSound(EmoteID.EmoteKiss, bubble, "fx_rizz", "Twins"); // temporary until rizz emote is drawn (will not be used currently because not in default emote pool)
+        PlayEmoteSound(EmoteID.EmoteFear, bubble, "fx_scaryviolin", "Twins");
+        //PlayEmoteSound(EmoteID.ItemSword, bubble, "fx_poke", "Twins"); 
         PlayEmoteSound(EmoteID.CritterSlime, bubble, "fx_sus", "Twins"); //(it looks like the visor of the crewmate trust)
-        PlayEmoteSound(EmoteID.ItemTombstone, bubble, "fx_deathbell", "Twins");
+        PlayEmoteSound(EmoteID.ItemTombstone, bubble, "fx_deathbell", "Twins"); // extremely rare, only used by default when like 5% health which they will probably die or heal before using)
         PlayEmoteSound(EmoteID.EmoteLaugh, bubble, "fx_badumtss", "Twins");
             // voicelines
         PlayEmoteSound(ModContent.EmoteBubbleType<ErmEmote>(), bubble, "evil_erm", "Evil");
