@@ -341,7 +341,8 @@ namespace Neurosama.Content.NPCs.Town
             emoteList.Add(ModContent.EmoteBubbleType<HeartEmote>());
             emoteList.Add(ModContent.EmoteBubbleType<NeweroEmote>());
             //emoteList.Add(ModContent.EmoteBubbleType<SmileEmote>());
-            emoteList.Add(81); // dynamite
+            emoteList.Add(EmoteID.DebuffCurse);
+            emoteList.Add(EmoteID.ItemDynamite);
             return null;
 		}
         
