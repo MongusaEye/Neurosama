@@ -322,6 +322,7 @@ Emotes: {
 	ErmEmote.Command: erm
 	TutelEmote.Command: tutel
 	FrickEmote.Command: frick
+	PipesEmote.Command: pipes
 }
 
 UI.ToggleOutfit: Toggle Outfit
