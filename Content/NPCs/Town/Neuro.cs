@@ -341,7 +341,7 @@ namespace Neurosama.Content.NPCs.Town
             emoteList.Add(ModContent.EmoteBubbleType<TutelEmote>());
 
             emoteList.Add(ModContent.EmoteBubbleType<FrickEmote>());
-            emoteList.Add(ModContent.EmoteBubbleType<FocusEmote>());
+            //emoteList.Add(ModContent.EmoteBubbleType<FocusEmote>());
             emoteList.Add(ModContent.EmoteBubbleType<NewlivEmote>());
             emoteList.Add(11); //curse
             return null;
