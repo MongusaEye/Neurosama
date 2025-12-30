@@ -94,7 +94,7 @@ public class EmoteSounds : GlobalEmoteBubble
         }
 
         SoundEngine.PlaySound(
-            new SoundStyle($"Neurosama/Assets/Sounds/{soundName}"),
+            new SoundStyle($"{nameof(Neurosama)}/Assets/Sounds/{soundName}") {Volume = 0.5f},
             bubble.anchor.entity.Center
         );
 
