@@ -7,13 +7,15 @@ using Neurosama.Content.EmoteBubbles;
 using Neurosama.Content.NPCs.Town;
 using Neurosama.Common.Configs;
 
-
+[System.Flags]
 public enum EmoteOrigin
 {
-    Twins,
-    Evil,
-    Neuro,
-    TwinsAndPlayer
+    None = 0,
+    Evil = 1 << 0,
+    Neuro = 1 << 1,
+    Player = 1 << 2,
+    Twins = Evil | Neuro,
+    TwinsAndPlayer = Twins | Player
 }
 
 public class EmoteSounds : GlobalEmoteBubble
@@ -25,7 +27,7 @@ public class EmoteSounds : GlobalEmoteBubble
 
         if (ModContent.GetInstance<NeurosamaConfig>().EmoteSoundsToggle == false)
             return;
-        // add emote sounds here
+
         PlayEmoteSound(ModContent.EmoteBubbleType<NeweroEmote>(), bubble, "SFX/groantube", EmoteOrigin.Twins);
         PlayEmoteSound(ModContent.EmoteBubbleType<NewlivEmote>(), bubble, "SFX/metalpipe", EmoteOrigin.Evil); //temporary until pipes emote is drawn
         PlayEmoteSound(EmoteID.EmoteSadness, bubble, "SFX/wompwompwomp", EmoteOrigin.Twins);
@@ -40,7 +42,8 @@ public class EmoteSounds : GlobalEmoteBubble
         PlayEmoteSound(EmoteID.CritterSlime, bubble, "SFX/sus", EmoteOrigin.Twins); //(it looks like the visor of the crewmate trust)
         PlayEmoteSound(EmoteID.ItemTombstone, bubble, "SFX/deathbell", EmoteOrigin.Twins); // extremely rare, only used by default when like 5% health which they will probably die or heal before using)
         PlayEmoteSound(EmoteID.EmoteLaugh, bubble, "SFX/badumtss", EmoteOrigin.Twins);
-            // voicelines
+
+        // Voicelines
         PlayEmoteSound(ModContent.EmoteBubbleType<ErmEmote>(), bubble, "evil_erm", EmoteOrigin.Evil);
         PlayEmoteSound(ModContent.EmoteBubbleType<ErmEmote>(), bubble, "neuro_erm", EmoteOrigin.Neuro);
 
@@ -64,33 +67,28 @@ public class EmoteSounds : GlobalEmoteBubble
         EmoteOrigin speaker
     )
     {
-
         if (bubble.emote != emoteID)
             return;
 
         if (bubble.anchor.entity is not Player && bubble.anchor.entity is not NPC)
             return;
 
-        if (speaker != EmoteOrigin.TwinsAndPlayer && bubble.anchor.entity is Player)
-            return;
-        
-        if (bubble.anchor.entity is NPC npc){
-
-        bool isNeuro = npc.type == ModContent.NPCType<Neuro>();
-        bool isEvil  = npc.type == ModContent.NPCType<Evil>();
-
-        if (speaker == EmoteOrigin.Neuro && !isNeuro)
+        if (bubble.anchor.entity is Player && !speaker.HasFlag(EmoteOrigin.Player))
             return;
 
-        if (speaker == EmoteOrigin.Evil && !isEvil)
-            return;
+        if (bubble.anchor.entity is NPC npc)
+        {
+            bool isNeuro = npc.type == ModContent.NPCType<Neuro>();
+            bool isEvil = npc.type == ModContent.NPCType<Evil>();
 
-        if (speaker == EmoteOrigin.Twins && !isEvil && !isNeuro)
-            return;
+            if (!isNeuro && !isEvil)
+                return;
 
-        if (speaker == EmoteOrigin.TwinsAndPlayer && !isEvil && !isNeuro)
-            return;
+            if (isNeuro && !speaker.HasFlag(EmoteOrigin.Neuro))
+                return;
 
+            if (isEvil && !speaker.HasFlag(EmoteOrigin.Evil))
+                return;
         }
 
         SoundEngine.PlaySound(
