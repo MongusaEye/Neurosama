@@ -91,8 +91,16 @@ public class EmoteSounds : GlobalEmoteBubble
                 return;
         }
 
+        float volume = 0.5f;
+        if (soundName.StartsWith("SFX"))
+        {
+            volume = ModContent.GetInstance<NeurosamaConfig>().EmoteSoundsVolumeFX;
+        } else
+        {
+            volume = ModContent.GetInstance<NeurosamaConfig>().EmoteSoundsVolumeVoice;
+        }
         SoundEngine.PlaySound(
-            new SoundStyle($"{nameof(Neurosama)}/Assets/Sounds/{soundName}") {Volume = 0.5f},
+            new SoundStyle($"{nameof(Neurosama)}/Assets/Sounds/{soundName}") {Volume = volume},
             bubble.anchor.entity.Center
         );
 

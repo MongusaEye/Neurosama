@@ -331,9 +331,14 @@ Configs: {
 		DisplayName: Neuro-sama Mod Client Config
 		Headers.Audio: Audio
 
-		EmoteSoundsToggle: {
-			Label: Emote Sounds
-			Tooltip: "Toggle Neuro & Evil making sounds when using certain emotes"
+		EmoteSoundsVolumeVoice: {
+			Label: Emote Voicelines Volume
+			Tooltip: Adjust volume of Neuro & Evil voicelines when using certain emotes
+		}
+
+		EmoteSoundsVolumeFX: {
+			Label: Emote Sound Effects Volume
+			Tooltip: Adjust volume of Neuro & Evil using their soundboards when using certain emotes
 		}
 	}
 }

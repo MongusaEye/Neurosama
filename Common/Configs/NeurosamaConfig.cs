@@ -17,5 +17,13 @@ namespace Neurosama.Common.Configs
 		[DefaultValue(true)]
 		//[ReloadRequired]
 		public bool EmoteSoundsToggle;
+
+        [Range(0f, 1f)] // Slider from 0.1 to 5.0
+		[DefaultValue(.5f)]
+        public float EmoteSoundsVolumeFX { get; set; } = 1f;
+
+		[Range(0f, 1f)] // Slider from 0.1 to 5.0
+		[DefaultValue(.5f)]
+        public float EmoteSoundsVolumeVoice { get; set; } = 1f;
 	}
 }
