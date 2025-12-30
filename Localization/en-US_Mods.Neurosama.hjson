@@ -328,12 +328,12 @@ UI.ToggleOutfit: Toggle Outfit
 
 Configs: {
 	NeurosamaConfig: {
-		DisplayName: Neurosama Client Config
+		DisplayName: Neuro-sama Mod Client Config
 		Headers.Audio: Audio
 
 		EmoteSoundsToggle: {
 			Label: Emote Sounds
-			Tooltip: ""
+			Tooltip: "Toggle Neuro & Evil making sounds when using certain emotes"
 		}
 	}
 }
