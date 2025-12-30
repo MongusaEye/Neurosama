@@ -26,20 +26,20 @@ public class EmoteSounds : GlobalEmoteBubble
         if (ModContent.GetInstance<NeurosamaConfig>().EmoteSoundsToggle == false)
             return;
         // add emote sounds here
-        PlayEmoteSound(ModContent.EmoteBubbleType<NeweroEmote>(), bubble, "fx_groantube", EmoteOrigin.Twins);
-        PlayEmoteSound(ModContent.EmoteBubbleType<NewlivEmote>(), bubble, "fx_metalpipe", EmoteOrigin.Evil); //temporary until pipes emote is drawn
-        PlayEmoteSound(EmoteID.EmoteSadness, bubble, "fx_wompwompwomp", EmoteOrigin.Twins);
-        PlayEmoteSound(EmoteID.EmoteSilly, bubble, "fx_clownhorn", EmoteOrigin.Twins);
-        PlayEmoteSound(EmoteID.DebuffCurse, bubble, "fx_incorrectbuzzer", EmoteOrigin.Twins);
-        PlayEmoteSound(EmoteID.EmoteNote, bubble, "fx_correctbuzzer", EmoteOrigin.Twins);
-        PlayEmoteSound(EmoteID.ItemDynamite, bubble, "fx_vineboom", EmoteOrigin.Twins);
-        PlayEmoteSound(EmoteID.DebuffSilence, bubble, "fx_awkwardcrickets", EmoteOrigin.Twins);
-        PlayEmoteSound(EmoteID.EmoteKiss, bubble, "fx_rizz", EmoteOrigin.Twins); // temporary until rizz emote is drawn (will not be used currently because not in default emote pool)
-        PlayEmoteSound(EmoteID.EmoteFear, bubble, "fx_scaryviolin", EmoteOrigin.Twins);
-        //PlayEmoteSound(EmoteID.ItemSword, bubble, "fx_poke", EmoteOrigin.Twins); 
-        PlayEmoteSound(EmoteID.CritterSlime, bubble, "fx_sus", EmoteOrigin.Twins); //(it looks like the visor of the crewmate trust)
-        PlayEmoteSound(EmoteID.ItemTombstone, bubble, "fx_deathbell", EmoteOrigin.Twins); // extremely rare, only used by default when like 5% health which they will probably die or heal before using)
-        PlayEmoteSound(EmoteID.EmoteLaugh, bubble, "fx_badumtss", EmoteOrigin.Twins);
+        PlayEmoteSound(ModContent.EmoteBubbleType<NeweroEmote>(), bubble, "SFX/groantube", EmoteOrigin.Twins);
+        PlayEmoteSound(ModContent.EmoteBubbleType<NewlivEmote>(), bubble, "SFX/metalpipe", EmoteOrigin.Evil); //temporary until pipes emote is drawn
+        PlayEmoteSound(EmoteID.EmoteSadness, bubble, "SFX/wompwompwomp", EmoteOrigin.Twins);
+        PlayEmoteSound(EmoteID.EmoteSilly, bubble, "SFX/clownhorn", EmoteOrigin.Twins);
+        PlayEmoteSound(EmoteID.DebuffCurse, bubble, "SFX/incorrectbuzzer", EmoteOrigin.Twins);
+        PlayEmoteSound(EmoteID.EmoteNote, bubble, "SFX/correctbuzzer", EmoteOrigin.Twins);
+        PlayEmoteSound(EmoteID.ItemDynamite, bubble, "SFX/vineboom", EmoteOrigin.Twins);
+        PlayEmoteSound(EmoteID.DebuffSilence, bubble, "SFX/awkwardcrickets", EmoteOrigin.Twins);
+        PlayEmoteSound(EmoteID.EmoteKiss, bubble, "SFX/rizz", EmoteOrigin.Twins); // temporary until rizz emote is drawn (will not be used currently because not in default emote pool)
+        PlayEmoteSound(EmoteID.EmoteFear, bubble, "SFX/scaryviolin", EmoteOrigin.Twins);
+        //PlayEmoteSound(EmoteID.ItemSword, bubble, "SFX/poke", EmoteOrigin.Twins); 
+        PlayEmoteSound(EmoteID.CritterSlime, bubble, "SFX/sus", EmoteOrigin.Twins); //(it looks like the visor of the crewmate trust)
+        PlayEmoteSound(EmoteID.ItemTombstone, bubble, "SFX/deathbell", EmoteOrigin.Twins); // extremely rare, only used by default when like 5% health which they will probably die or heal before using)
+        PlayEmoteSound(EmoteID.EmoteLaugh, bubble, "SFX/badumtss", EmoteOrigin.Twins);
             // voicelines
         PlayEmoteSound(ModContent.EmoteBubbleType<ErmEmote>(), bubble, "evil_erm", EmoteOrigin.Evil);
         PlayEmoteSound(ModContent.EmoteBubbleType<ErmEmote>(), bubble, "neuro_erm", EmoteOrigin.Neuro);
