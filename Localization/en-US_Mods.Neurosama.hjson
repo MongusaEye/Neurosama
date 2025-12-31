@@ -167,12 +167,12 @@ Items: {
 
 	VedalFumo: {
 		DisplayName: Vedal Plush
-		Tooltip: ""
+		Tooltip: "'May be delivered in pancake form'"
 	}
 
 	LavaLamp: {
 		DisplayName: Neuro Lava Lamp
-		Tooltip: ""
+		Tooltip: "'NEUROSAMA BRANDED ?!'"
 	}
 }
 
