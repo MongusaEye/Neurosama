@@ -21,6 +21,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	ColorfulArrayMusicBox: {
+		DisplayName: Music Box (Colorful Array)
+		Tooltip: ""
+	}
+
 	NeuroCatErm: {
 		DisplayName: neuroErm
 		Tooltip: "'The epitome of aesthetic splendor that will forever enchant your gaze'"
