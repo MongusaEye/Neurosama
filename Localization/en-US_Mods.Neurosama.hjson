@@ -325,3 +325,25 @@ Emotes: {
 }
 
 UI.ToggleOutfit: Toggle Outfit
+
+Configs: {
+	NeurosamaConfig: {
+		DisplayName: Neuro-sama Mod Client Config
+		Headers.Audio: Audio
+
+		EmoteSoundsVolume: {
+			Label: Emote Sound Volume
+			Tooltip: Adjust volume of the sounds Neuro & Evil make when using certain emotes
+		}
+
+		EmoteSFXToggle: {
+			Label: Emote Soundboard Sounds
+			Tooltip: Toggle whether Neuro & Evil play soundboard sounds when using certain emotes
+		}
+
+		EmoteVoiceToggle: {
+			Label: Emote Voiceline Sounds
+			Tooltip: Toggle whether Neuro & Evil say voicelines when using certain emotes
+		}
+	}
+}
