@@ -1,4 +1,4 @@
-=~= [c/947edc:Neuro-sama mod!] =~=
+=== [c/947edc:Neuro-sama mod!] ===
 
 This is a fan made mod for the Twitch streamer Neuro-sama and her sister Evil Neuro. It aims to be mainly a cosmetic mod, adding a bunch of references to the Neuro twins and their community.
 
@@ -30,6 +30,16 @@ Check the mod's homepage for links and the source code!
 
 
 =~= Changelog =~=
+
+v0.3
+- Added 2 more toggles to the neuro twins (and their shimmer variants)
+- Added the ability for the neuro twins to use custom emotes
+- Added sound effects when the neuro twins use custom emotes (toggle in mod config)
+- Added a couple more item tooltips
+- Added colourful array music box (placeholder texture at the moment)
+- Added catgirls to vedal
+- Fixed statues not glowing with spelunker potion
+- Fixed minor inconsistency with evil neuro plush texture
 
 v0.2
 - Added Neko toggles to the twins
