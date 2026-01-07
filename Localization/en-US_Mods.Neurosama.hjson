@@ -300,6 +300,7 @@ Dialogue: {
 		StandardDialogue7: Hey Ladies! My name is Vedal. I run a few Twitch channels and am an overall tech wizard. I would best describe myself as a bald beautiful girl. Chat insults me a lot and says I'm washed-up. Prove them wrong by messaging me.
 		StandardDialogue8: Am I pregnant?
 		StandardDialogue9: I would like the womb tattoo. I am begging, I am on my hands and knees, send me the womb tattoo.
+		StandardDialogue10: Catgirls catgirls catgirls catgirls catgirls catgirls catgirls catgirls Catgirls Catgirls CATGIRLS CATGIRLS CATGIRLS!
 	}
 }
 
@@ -327,6 +328,8 @@ Emotes: {
 	ErmEmote.Command: erm
 	TutelEmote.Command: tutel
 	FrickEmote.Command: frick
+	PipesEmote.Command: pipes
+	NeurizzEmote.Command: neurizz
 }
 
 UI.ToggleOutfit: Toggle Outfit
