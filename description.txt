@@ -31,6 +31,9 @@ Check the mod's homepage for links and the source code!
 
 =~= Changelog =~=
 
+v0.3.1
+- Neuro actaully sells the Colourful Array music box now
+
 v0.3
 - Added 2 more toggles to the neuro twins (and their shimmer variants)
 - Added the ability for the neuro twins to use custom emotes
