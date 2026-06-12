@@ -37,7 +37,7 @@ Anyone is welcome to contribute to the mod! If you would like to participate in 
 [*] Vedal (Creator of Neuro-sama and Abandoned Archive)
 [/list]
 [h1]Links[/h1]
-[b][url=https://github.com/K0nomi/Neurosama]Source Code[/url]
+[b][url=https://github.com/Konomi-io/Neurosama]Source Code[/url]
 [url=https://twitch.tv/vedal987]Neuro-sama on Twitch[/url]
 [url=https://discord.gg/neurosama]Neuro-sama Discord[/url]
 [url=https://discord.com/channels/574720535888396288/1445858406090018836]Discord Thread for Mod Discussion[/url]
