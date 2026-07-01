@@ -273,6 +273,7 @@ namespace Neurosama.Content.NPCs.Town
                 .Add<Items.Furniture.NeuroFumo>()
                 .Add<Items.Furniture.VedalFumo>(NPCConditions.VedalPresent)
                 .Add<Items.Furniture.AbandonedArchive>(NPCConditions.VedalPresent)
+                .Add<Items.Furniture.LavaLamp>()
                 .Add<Items.Donowall>()
                 .Add<Items.Donobrick>()
                 .Add<NeuroMusicBox>()
