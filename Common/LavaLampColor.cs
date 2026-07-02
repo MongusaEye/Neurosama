@@ -184,6 +184,10 @@ namespace Neurosama.Content
                     ModContent.GetInstance<Neurosama>().Logger.Info($"LavaLamp SSE stream reset by server (reconnecting): {ioEx.Message}");
                     HandleFallbackTransition();
                 }
+                catch (IOException)
+                {
+                    HandleFallbackTransition();
+                }
                 catch (Exception ex)
                 {
                     ModContent.GetInstance<Neurosama>().Logger.Debug($"LavaLamp SSE disconnected unexpectedly: {ex.Message}");
@@ -251,9 +255,8 @@ namespace Neurosama.Content
                     }
                 }
             }
-            catch (IOException) when (token.IsCancellationRequested)
+            catch (IOException) when (token.IsCancellationRequested || !_isLavaLampOnScreen || !IsSteamConnected)
             {
-                // world exit
                 return;
             }
             finally
