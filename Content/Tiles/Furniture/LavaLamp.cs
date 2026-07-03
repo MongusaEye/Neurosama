@@ -39,7 +39,7 @@ namespace Neurosama.Content.Tiles.Furniture
 
         public override void AnimateTile(ref int frame, ref int frameCounter)
         {
-            if (++frameCounter >= 8)
+            if (++frameCounter >= 12)
             {
                 frameCounter = 0;
                 frame = ++frame % 7;
