@@ -32,7 +32,6 @@ namespace Neurosama.Content.Tiles.Furniture
             glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow");
         }
 
-        
         public override bool CreateDust(int i, int j, ref int type)
         {
             return false;
@@ -87,6 +86,7 @@ namespace Neurosama.Content.Tiles.Furniture
         {
             LavaLampColor.MarkLampAsVisible();
         }
+        
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
             const float factor = 100f / (255f * 255f);
