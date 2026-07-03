@@ -13,9 +13,6 @@ using NLayer;
 
 namespace Neurosama
 {
-    /// <summary>
-    /// Global manager that holds multiple active streaming channels and shares a single HttpClient.
-    /// </summary>
     public static class Mp3StreamManager
     {
         private static readonly HttpClient _sharedHttpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(8) };
@@ -73,9 +70,6 @@ namespace Neurosama
         }
     }
 
-    /// <summary>
-    /// Represents an independent, instance-based audio stream slot.
-    /// </summary>
     public class Mp3StreamChannel
     {
         public float Volume { get; set; } = 1f;
@@ -267,15 +261,18 @@ namespace Neurosama
             finally
             {
                 _stopRequested = true;
+                try
+                {
+                    response?.Content?.Dispose();
+                }
+                catch { }
 
-                // Safely wipe out the request state machine first to bypass DrainAsync()
                 try
                 {
                     request?.Dispose();
                 }
                 catch { }
 
-                // Hard close the active network stream context immediately
                 try
                 {
                     response?.Dispose();
@@ -384,9 +381,6 @@ namespace Neurosama
         }
     }
 
-    /// <summary>
-    /// Stream wrapper tracking current byte positions for the decoder.
-    /// </summary>
     public class PositionTrackingStream : Stream
     {
         private readonly Stream _baseStream;
@@ -421,9 +415,6 @@ namespace Neurosama
         public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
     }
 
-    /// <summary>
-    /// Parsers raw icy streams to read injected metadata text blocks dynamically.
-    /// </summary>
     public class IcyStreamWrapper : Stream
     {
         private readonly Stream _baseStream;

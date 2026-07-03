@@ -6,6 +6,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using Terraria.DataStructures;
 
 namespace Neurosama.Content.Tiles.Furniture
 {
@@ -82,6 +83,10 @@ namespace Neurosama.Content.Tiles.Furniture
             spriteBatch.Draw(glowTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
 
+        public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
+        {
+            LavaLampColor.MarkLampAsVisible();
+        }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
             const float factor = 100f / (255f * 255f);

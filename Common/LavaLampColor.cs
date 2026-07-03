@@ -1,7 +1,8 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
-using System.Net.Http;
+using System.Net.Security;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -14,7 +15,6 @@ namespace Neurosama.Content
 {
     public class LavaLampColor : ModSystem
     {
-        // Globally accessible properties for Lavalamp furniture
         public static Color CurrentColor { get; private set; } = Color.White;
 
         public static bool IsLive
@@ -27,18 +27,28 @@ namespace Neurosama.Content
             get { lock (_stateLock) return _lastSetUnixMs; }
         }
 
-        // Thread-protected backing fields
         private static Color _targetColor = Color.White;
         private static bool _isLive = false;
         private static long _lastSetUnixMs = 0;
         private static readonly object _stateLock = new();
 
         private const float LerpSpeed = 0.05f;
-        private static readonly HttpClient httpClient = new() { Timeout = TimeSpan.FromSeconds(10) };
         private static CancellationTokenSource _cts;
-        private static volatile bool _isLavaLampOnScreen = false;
-        private static int _scanTimer = 0;
+        private static int _lampActiveFramesRemaining = 0; // Thread-safe atomic counter
         private static volatile bool _useDiscoFallback = false;
+
+        public static bool IsLavaLampOnScreen => Volatile.Read(ref _lampActiveFramesRemaining) > 0;
+
+        public static void MarkLampAsVisible()
+        {
+            // Thread-safe write: Forces the value to 5 atomically across rendering threads
+            Interlocked.Exchange(ref _lampActiveFramesRemaining, 5);
+        }
+
+        private static string TrimBytesAndEndings(string source)
+        {
+            return source.Replace("\r", "").Trim();
+        }
 
         private static string BaseUrl
         {
@@ -50,7 +60,25 @@ namespace Neurosama.Content
                     : "https://api.neurolavalamp.com";
             }
         }
-        //check if connected to internet
+
+        private static bool IsHostReachable(string url)
+        {
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                return false;
+            }
+            try
+            {
+                var uri = new Uri(url);
+                var addresses = System.Net.Dns.GetHostAddresses(uri.Host);
+                return addresses != null && addresses.Length > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private static bool IsSteamConnected =>
             Terraria.Social.SocialAPI.Mode == Terraria.Social.SocialMode.Steam &&
             Steamworks.SteamAPI.IsSteamRunning() &&
@@ -61,8 +89,7 @@ namespace Neurosama.Content
         public override void OnWorldLoad()
         {
             if (Main.dedServ) return;
-            
-            //initialize as disco
+
             lock (_stateLock)
             {
                 _targetColor = Main.DiscoColor;
@@ -71,6 +98,7 @@ namespace Neurosama.Content
 
             _cts = new CancellationTokenSource();
             _useDiscoFallback = false;
+            Interlocked.Exchange(ref _lampActiveFramesRemaining, 0);
             Task.Run(() => StreamLavaLampAsync(_cts.Token));
         }
 
@@ -82,34 +110,36 @@ namespace Neurosama.Content
             _cts?.Cancel();
             _cts?.Dispose();
             _cts = null;
-            _isLavaLampOnScreen = false;
+            Interlocked.Exchange(ref _lampActiveFramesRemaining, 0);
         }
 
         public override void PostUpdateEverything()
         {
             if (Main.dedServ) return;
 
+            // Thread-safe decrement on the main game thread
+            if (Volatile.Read(ref _lampActiveFramesRemaining) > 0)
+            {
+                Interlocked.Decrement(ref _lampActiveFramesRemaining);
+            }
+
             Color workingTargetColor;
             bool workingIsLive;
 
-            // Extract values safely away from background thread manipulation
             lock (_stateLock)
             {
                 workingTargetColor = _targetColor;
                 workingIsLive = _isLive;
             }
 
-            // 1. Fetch config to check for the disco override feature
             var config = ModContent.GetInstance<Common.Configs.NeurosamaConfig>();
             bool configOverrideActive = config != null && config.UseDiscoColorWhenNoNeuroStream && !workingIsLive;
 
-            // 2. Determine final target color destination for this frame
             if (_useDiscoFallback || configOverrideActive)
             {
                 workingTargetColor = Main.DiscoColor;
             }
 
-            // 3. Smoothly transition CurrentColor toward workingTargetColor frame-by-frame
             if (CurrentColor != workingTargetColor)
             {
                 CurrentColor = Color.Lerp(CurrentColor, workingTargetColor, LerpSpeed);
@@ -119,40 +149,6 @@ namespace Neurosama.Content
                     CurrentColor = workingTargetColor;
                 }
             }
-
-            // 4. Update tile scan timing
-            _scanTimer++;
-            if (_scanTimer >= 30)
-            {
-                _scanTimer = 0;
-                _isLavaLampOnScreen = CheckIfLampOnScreen();
-            }
-        }
-
-        private bool CheckIfLampOnScreen()
-        {
-            // 1. Cache conversions and clamp bounds immediately to eliminate overhead inside the loops
-            int startX = Math.Max(0, (int)(Main.screenPosition.X / 16f) - 2);
-            int endX = Math.Min(Main.maxTilesX - 1, (int)((Main.screenPosition.X + Main.screenWidth) / 16f) + 2);
-            int startY = Math.Max(0, (int)(Main.screenPosition.Y / 16f) - 2);
-            int endY = Math.Min(Main.maxTilesY - 1, (int)((Main.screenPosition.Y + Main.screenHeight) / 16f) + 2);
-
-            ushort targetTileType = (ushort)ModContent.TileType<LavaLamp>();
-
-            // 2. Step by 2 on the Y axis since the lamp is 2 tiles high.
-            // This allows you to skip 50% of the screen's Y-coordinates safely.
-            for (int x = startX; x < endX; x++)
-            {
-                for (int y = startY; y < endY; y += 2)
-                {
-                    Tile tile = Main.tile[x, y];
-                    if (tile.HasTile && tile.TileType == targetTileType)
-                    {
-                        return true; // Found a piece of the lamp, stop checking immediately
-                    }
-                }
-            }
-            return false;
         }
 
         private static async Task StreamLavaLampAsync(CancellationToken token)
@@ -160,167 +156,150 @@ namespace Neurosama.Content
             while (!token.IsCancellationRequested)
             {
                 string currentActiveUrl = BaseUrl;
-                if (!_isLavaLampOnScreen || !IsSteamConnected)
+
+                if (!IsLavaLampOnScreen || !IsSteamConnected)
                 {
-                    if (!IsSteamConnected && _isLavaLampOnScreen)
+                    if (!IsSteamConnected && IsLavaLampOnScreen)
                     {
                         HandleFallbackTransition();
                     }
                     await Task.Delay(1000, token);
                     continue;
                 }
+
                 if (!IsHostReachable(currentActiveUrl))
                 {
                     HandleFallbackTransition();
-                    await Task.Delay(2000, token); // Wait 2 seconds before checking again
-                    continue; // Skip the rest of the loop entirely to prevent tML error intercepts
-                }
-                try
-                {
-                    await ListenToSSEAsync(currentActiveUrl, token);
-                }
-                catch (HttpIOException ioEx)
-                {
-                    ModContent.GetInstance<Neurosama>().Logger.Info($"LavaLamp SSE stream reset by server (reconnecting): {ioEx.Message}");
-                    HandleFallbackTransition();
-                }
-                catch (IOException)
-                {
-                    HandleFallbackTransition();
-                }
-                catch (Exception ex)
-                {
-                    ModContent.GetInstance<Neurosama>().Logger.Debug($"LavaLamp SSE disconnected unexpectedly: {ex.Message}");
-                    HandleFallbackTransition();
+                    await Task.Delay(2000, token);
+                    continue;
                 }
 
-                if (!token.IsCancellationRequested && _isLavaLampOnScreen && IsSteamConnected)
+                await RunSilentSseLoopAsync(currentActiveUrl, token);
+
+                bool liveSnapshot;
+                lock (_stateLock)
                 {
-                    await PollFallbackAsync(token);
+                    liveSnapshot = _isLive;
+                }
+
+                int delayMs = _useDiscoFallback ? 10000 : (liveSnapshot ? 1000 : 30000);
+                try
+                {
+                    await Task.Delay(delayMs, token);
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
                 }
             }
         }
 
-        private static async Task ListenToSSEAsync(string targetUrl, CancellationToken token)
+        private static async Task RunSilentSseLoopAsync(string url, CancellationToken token)
         {
-            // Scope these out so we can safely kill them in a finally block
-            HttpRequestMessage request = null;
-            HttpResponseMessage response = null;
+            var uri = new Uri($"{url}/v1/events");
+            using var client = new TcpClient();
 
             try
             {
-                request = new HttpRequestMessage(HttpMethod.Get, $"{targetUrl}/v1/events");
+                ModContent.GetInstance<Neurosama>().Logger.Debug($"SSE Stream Connecting: {uri.AbsoluteUri}");
+                await client.ConnectAsync(uri.Host, 443, token);
 
-                // FORCE NATIVE TEARDOWN: Prevents .NET from holding onto the socket 
-                // in an internal pool when the internet drops or fluctuates.
-                request.Headers.ConnectionClose = true;
+                using var sslStream = new SslStream(client.GetStream(), false);
+                await sslStream.AuthenticateAsClientAsync(uri.Host);
 
-                response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
-                response.EnsureSuccessStatusCode();
+                string request = $"GET {uri.PathAndQuery} HTTP/1.1\r\n" +
+                                 $"Host: {uri.Host}\r\n" +
+                                 "Accept: text/event-stream\r\n" +
+                                 "Connection: close\r\n\r\n";
 
-                using var stream = await response.Content.ReadAsStreamAsync(token);
-                using var reader = new StreamReader(stream, Encoding.UTF8);
+                byte[] requestBytes = Encoding.UTF8.GetBytes(request);
+                await sslStream.WriteAsync(requestBytes.AsMemory(0, requestBytes.Length), token);
+                await sslStream.FlushAsync(token);
 
-                StringBuilder dataBuffer = new();
+                byte[] buffer = new byte[4096];
+                StringBuilder stringBuffer = new StringBuilder();
+                int headerEndIndex = -1;
 
-                while (!token.IsCancellationRequested && !reader.EndOfStream)
+                while (headerEndIndex == -1 && !token.IsCancellationRequested)
                 {
-                    if (!_isLavaLampOnScreen || !IsSteamConnected) break;
+                    int read = await sslStream.ReadAsync(buffer, 0, buffer.Length, token);
+                    if (read == 0) return;
 
-                    if (targetUrl != BaseUrl)
+                    stringBuffer.Append(Encoding.UTF8.GetString(buffer, 0, read));
+                    headerEndIndex = stringBuffer.ToString().IndexOf("\r\n\r\n");
+                }
+
+                string structuralRemainder = stringBuffer.ToString().Substring(headerEndIndex + 4);
+                StringBuilder lineBuffer = new StringBuilder();
+                StringBuilder dataBuffer = new StringBuilder();
+                lineBuffer.Append(structuralRemainder);
+
+                while (!token.IsCancellationRequested && IsLavaLampOnScreen && IsSteamConnected)
+                {
+                    if (url != BaseUrl) break;
+
+                    if (client.Client == null || !client.Connected) break;
+
+                    if (client.Client.Available == 0)
                     {
-                        ModContent.GetInstance<Neurosama>().Logger.Info("LavaLamp config changed server target. Reconnecting...");
-                        lock (_stateLock) _lastSetUnixMs = 0;
+                        bool pollPassed = !(client.Client.Poll(1, SelectMode.SelectRead) && client.Client.Available == 0);
+                        if (!pollPassed) break;
+                    }
+
+                    int bytesRead = 0;
+                    try
+                    {
+                        bytesRead = await sslStream.ReadAsync(buffer, 0, buffer.Length, token);
+                    }
+                    catch
+                    {
                         break;
                     }
 
-                    string line = await reader.ReadLineAsync();
+                    if (bytesRead == 0) break;
 
-                    if (string.IsNullOrEmpty(line))
+                    string chunkText = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    lineBuffer.Append(chunkText);
+
+                    string currentContent = lineBuffer.ToString();
+                    int newlineIndex;
+
+                    while ((newlineIndex = currentContent.IndexOf('\n')) != -1)
                     {
-                        if (dataBuffer.Length > 0)
+                        string rawLine = currentContent.Substring(0, newlineIndex);
+                        string line = TrimBytesAndEndings(rawLine);
+
+                        currentContent = currentContent.Substring(newlineIndex + 1);
+
+                        lineBuffer.Clear();
+                        lineBuffer.Append(currentContent);
+
+                        if (string.IsNullOrEmpty(line))
                         {
-                            ParseAndEmitState(dataBuffer.ToString());
-                            dataBuffer.Clear();
+                            if (dataBuffer.Length > 0)
+                            {
+                                ParseAndEmitState(dataBuffer.ToString());
+                                dataBuffer.Clear();
+                            }
+                            continue;
                         }
-                        continue;
-                    }
 
-                    if (line.StartsWith(":")) continue;
+                        if (line.StartsWith(":")) continue;
 
-                    if (line.StartsWith("data:"))
-                    {
-                        string value = line.Substring(5).Trim();
-                        dataBuffer.AppendLine(value);
+                        if (line.StartsWith("data:"))
+                        {
+                            dataBuffer.AppendLine(line.Substring(5).Trim());
+                        }
                     }
                 }
             }
-            catch (IOException) when (token.IsCancellationRequested || !_isLavaLampOnScreen || !IsSteamConnected)
+            catch
             {
-                return;
+                // Suppress background drops silently
             }
             finally
             {
-                // dispose state machines to ensure no background threads drag out socket lifetimes
-                try
-                {
-                    request?.Dispose();
-                }
-                catch { }
-
-                try
-                {
-                    response?.Dispose();
-                }
-                catch { }
-            }
-        }
-
-        private static async Task PollFallbackAsync(CancellationToken token)
-        {
-            ModContent.GetInstance<Neurosama>().Logger.Info("LavaLamp entering smart polling fallback mode.");
-            DateTime sseRetryDeadline = DateTime.UtcNow.AddSeconds(60);
-
-            while (DateTime.UtcNow < sseRetryDeadline && !token.IsCancellationRequested && _isLavaLampOnScreen && IsSteamConnected)
-            {
-                string currentPollingUrl = BaseUrl;
-
-                try
-                {
-                    if (!_isLavaLampOnScreen || !IsSteamConnected) return;
-
-                    using var response = await httpClient.GetAsync($"{currentPollingUrl}/v1/rgb", token);
-                    response.EnsureSuccessStatusCode();
-                    string json = await response.Content.ReadAsStringAsync(token);
-
-                    ParseAndEmitState(json);
-
-                    bool liveSnapshotFallback;
-                    lock (_stateLock) liveSnapshotFallback = _isLive;
-                    if (liveSnapshotFallback)
-                    {
-                        return; // Exit PollFallback immediately to resume live SSE streaming
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ModContent.GetInstance<Neurosama>().Logger.Debug($"LavaLamp Poll Error: {ex.Message}");
-                    HandleFallbackTransition();
-                }
-
-                bool liveSnapshot;
-                lock (_stateLock) liveSnapshot = _isLive;
-
-                int delayMs = _useDiscoFallback ? 10000 : (liveSnapshot ? 1000 : 30000);
-                int interval = 500;
-                int elapsed = 0;
-                while (elapsed < delayMs && !token.IsCancellationRequested)
-                {
-                    if (currentPollingUrl != BaseUrl || !_isLavaLampOnScreen || !IsSteamConnected) return;
-
-                    await Task.Delay(interval, token);
-                    elapsed += interval;
-                }
+                HandleFallbackTransition();
             }
         }
 
@@ -350,11 +329,7 @@ namespace Neurosama.Content
 
                 lock (_stateLock)
                 {
-                    // Stale / identical structural checks executed within thread safety limits
-                    if (newUnixMs < _lastSetUnixMs && newColor == _targetColor && newLive == _isLive)
-                        return;
-
-                    if (newUnixMs == _lastSetUnixMs && newColor == _targetColor && newLive == _isLive)
+                    if (newUnixMs <= _lastSetUnixMs && newColor == _targetColor && newLive == _isLive)
                         return;
 
                     _targetColor = newColor;
@@ -364,26 +339,8 @@ namespace Neurosama.Content
             }
             catch (Exception ex)
             {
-                ModContent.GetInstance<Neurosama>().Logger.Debug($"LavaLamp Parse Error: {ex.Message}");
+                ModContent.GetInstance<Neurosama>().Logger.Debug($"LavaLamp JSON Parse Error: {ex.Message}");
                 HandleFallbackTransition();
-            }
-        }
-        private static bool IsHostReachable(string url)
-        {
-            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
-            {
-                return false; // Exit instantly without triggering a SocketException
-            }
-            try
-            {
-                var uri = new Uri(url);
-                var addresses = System.Net.Dns.GetHostAddresses(uri.Host);
-                return addresses != null && addresses.Length > 0;
-            }
-            catch
-            {
-                // Domain cannot be found or offline state encountered
-                return false;
             }
         }
     }
