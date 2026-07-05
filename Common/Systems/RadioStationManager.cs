@@ -96,7 +96,7 @@ namespace Neurosama.Common
 
                         string incomingTitle = channel.CurrentSongTitle;
 
-                        if (!string.IsNullOrEmpty(incomingTitle) && station.LastChattedSong != incomingTitle)
+                        if (!string.IsNullOrEmpty(incomingTitle) && station.LastChattedSong != incomingTitle && ModContent.GetInstance<Common.Configs.NeurosamaConfig>().DisplayNowPlaying)
                         {
                             station.LastChattedSong = incomingTitle;
 

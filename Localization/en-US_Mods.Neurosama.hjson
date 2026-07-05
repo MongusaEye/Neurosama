@@ -383,6 +383,11 @@ Configs: {
 			Tooltip: Keeps music box radio streams running when out of tab
 		}
 
+		DisplayNowPlaying: {
+			Label: Display "Now Playing:" Message
+			Tooltip: Toggle "Now Playing:" messages in chat while listening to radio music boxes
+		}
+
 		UseTestServer: {
 			Label: Use Test Server
 			Tooltip: Test your lava lamp sync outside of streams (Debug)

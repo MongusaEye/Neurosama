@@ -24,6 +24,9 @@ namespace Neurosama.Common.Configs
         [DefaultValue(false)]
         public bool KeepStreamingUnfocused;
 
+        [DefaultValue(true)]
+        public bool DisplayNowPlaying;
+
         [Header("LavaLamp")]
         [DefaultValue(false)]
         public bool UseTestServer;
