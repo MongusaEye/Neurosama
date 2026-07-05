@@ -412,6 +412,11 @@ Configs: {
 			Label: Lava Lamp Offline Latency (ms)
 			Tooltip: How often to check that Neuro is live
 		}
+
+		StreamSync: {
+			Label: Stream Sync
+			Tooltip: Toggle syncing lava lamp to Neuro's stream (no sync will default to rainbow brick color pattern)
+		}
 	}
 
 	LavaLampServerTypeOptions: {

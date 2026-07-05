@@ -43,7 +43,10 @@ namespace Neurosama.Common.Configs
         public string CustomServerUrl { get; set; }
 
         [DefaultValue(false)]
-        public bool UseDiscoColorWhenNoNeuroStream;
+        public bool UseDiscoColorWhenNoNeuroStream { get; set; }
+
+        [DefaultValue(true)]
+        public bool StreamSync { get; set; }
 
         [Range(100, 1000)]
         [Increment(100)]

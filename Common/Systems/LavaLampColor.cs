@@ -169,8 +169,16 @@ namespace Neurosama.Content
         {
             while (!token.IsCancellationRequested)
             {
-                string currentActiveUrl = BaseUrl;
                 var config = ModContent.GetInstance<NeurosamaConfig>();
+                if (config != null && !config.StreamSync)
+                {
+                    HandleFallbackTransition();
+                    _useDiscoFallback = true;
+                    await Task.Delay(1000, token);
+                    continue;
+                }
+
+                string currentActiveUrl = BaseUrl;
 
                 if (!IsLavaLampOnScreen)
                 {
@@ -248,6 +256,8 @@ namespace Neurosama.Content
 
                 while (!token.IsCancellationRequested && IsLavaLampOnScreen && IsApiConnected)
                 {
+                    if (ModContent.GetInstance<NeurosamaConfig>()?.StreamSync == false) break;
+
                     if (url != BaseUrl) break;
 
                     if (client.Client == null || !client.Connected) break;
