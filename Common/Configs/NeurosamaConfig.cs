@@ -6,7 +6,7 @@ namespace Neurosama.Common.Configs
     public enum LavaLampServerTypeOptions
     {
         TestServer,
-        RegularServer,
+        MainServer,
         CustomServer
     }
 
@@ -36,7 +36,7 @@ namespace Neurosama.Common.Configs
 
         [Header("LavaLamp")]
 
-        [DefaultValue(LavaLampServerTypeOptions.RegularServer)]
+        [DefaultValue(LavaLampServerTypeOptions.MainServer)]
         public LavaLampServerTypeOptions SelectedServerType { get; set; }
 
         [DefaultValue("https://api.neurolavalamp.com")]

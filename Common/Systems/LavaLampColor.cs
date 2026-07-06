@@ -71,7 +71,7 @@ namespace Neurosama.Content
                             ? config.CustomServerUrl
                             : "https://api.neurolavalamp.com";
 
-                    case LavaLampServerTypeOptions.RegularServer:
+                    case LavaLampServerTypeOptions.MainServer:
                     default:
                         return "https://api.neurolavalamp.com";
                 }

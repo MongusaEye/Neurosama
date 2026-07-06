@@ -427,8 +427,8 @@ Configs: {
 			Tooltip: Randomly changes to different colors, randomly toggles online and offline
 		}
 
-		RegularServer: {
-			Label: Regular Server
+		MainServer: {
+			Label: Main Server
 			Tooltip: Syncs with Neuro's on-stream lava lamp
 		}
 
