@@ -172,7 +172,11 @@ Items: {
 
 	LavaLamp: {
 		DisplayName: Neuro Lava Lamp
-		Tooltip: "'NEUROSAMA BRANDED ?!'"
+		Tooltip:
+			'''
+			'NEUROSAMA BRANDED?!'
+			Requires internet connection
+			'''
 	}
 
 	Neuro21MusicBox: {
