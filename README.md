@@ -50,4 +50,4 @@ Anyone is welcome to contribute to the mod! If you would like to participate in 
 
 ## License
 All original content created for this mod is licensed under the [MIT license](https://github.com/k0nomi/Neurosama/blob/main/LICENSE).
-All third-party characters, assets, and intellectual properties (including Neuro-sama, Evil Neuro, Vedal, TruckersFM, and Abandoned Archive) remain the property of their respective owners.
+All third-party characters, assets, and intellectual properties (including Neuro-sama, Evil Neuro, Vedal, and Abandoned Archive) remain the property of their respective owners.
