@@ -25,6 +25,8 @@ namespace Neurosama.Common
 
         public override void Load()
         {
+            if (Main.dedServ) return;
+            
             _stations = new List<RadioStations>
             {
                 new RadioStations
@@ -64,6 +66,8 @@ namespace Neurosama.Common
 
         public override void PostUpdateEverything()
         {
+            if (Main.dedServ) return;
+
             if (Main.gameMenu)
             {
                 foreach (var station in _stations)
